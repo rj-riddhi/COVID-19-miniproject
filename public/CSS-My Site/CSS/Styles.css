@@ -1,0 +1,147 @@
+body{
+  text-align: center;
+  background-color: #d0e8f2;
+  margin: 2px;
+}
+hr{
+  border-style: dotted;
+ border-bottom: none;
+ border-width:2px;
+ border-color: #265F6A;
+ width: 2%;
+ margin: 5rem auto;
+}
+h3
+{
+  color:#03506f;
+  font-family: 'Nunito', sans-serif;
+
+  font-weight:bold;
+  margin:1rem;
+}
+h2{
+  font-family: 'Nunito', sans-serif;
+  color:#456268;
+  font-weight: bold;
+  font-size:3rem;
+}
+
+h1{
+  font-family: 'Great Vibes', cursive;
+  font-weight: normal;
+  font-size: 5.46rem;
+  color: #456268;
+  margin: auto auto 2px auto;
+}
+p{
+  width: 600px;
+  line-height: 2;
+  margin: auto;
+
+}
+
+
+.container1{
+  margin: 3rem auto auto auto;
+}
+.container2{
+  margin: 100px auto;
+}
+
+.skill-row{
+  width: 50%;
+  margin: 100px auto;
+  text-align:left;
+
+
+}
+.code{
+  width: 25%;
+  float: left;
+  padding-right: 30px;
+}
+.pizza{
+  width:25%;
+  float: right;
+}
+
+.cloud1{
+  position: relative;
+  margin-left: 45rem;
+ padding-bottom: 4rem;
+}
+.cloud2{
+  position: absolute;
+  margin: auto 5rem auto auto;
+  display: block;
+  padding-left: 15rem;
+
+}
+.mountain{
+  display: block;
+  position: relative;
+  margin: auto 25rem auto auto;
+}
+.header{
+  line-height: 2;
+}
+.header2{
+  margin-top: 0px;
+
+}
+.Radhi{
+  width: 10rem;
+  height: 10rem;
+}
+span{
+  text-decoration: underline;
+}
+.btn {
+  background: #24455c;
+  background-image: -webkit-linear-gradient(top, #24455c, #4a606e);
+  background-image: -moz-linear-gradient(top, #24455c, #4a606e);
+  background-image: -ms-linear-gradient(top, #24455c, #4a606e);
+  background-image: -o-linear-gradient(top, #24455c, #4a606e);
+  background-image: linear-gradient(to bottom, #24455c, #4a606e);
+  -webkit-border-radius: 8;
+  -moz-border-radius: 8;
+  border-radius: 8px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  margin: 30px;
+}
+
+.btn:hover {
+  background: #74818a;
+  background-image: -webkit-linear-gradient(top, #74818a, #8db0c7);
+  background-image: -moz-linear-gradient(top, #74818a, #8db0c7);
+  background-image: -ms-linear-gradient(top, #74818a, #8db0c7);
+  background-image: -o-linear-gradient(top, #74818a, #8db0c7);
+  background-image: linear-gradient(to bottom, #74818a, #8db0c7);
+  text-decoration: none;
+}
+.footer{
+  font-family: 'Nunito', sans-serif;
+  background-color: #456268;
+  margin: 40px auto auto auto ;
+  padding: 40px;
+}
+.footer-link{
+  margin: 10px 20px;
+   color: #03506f;
+   text-decoration: none;
+   font-weight: bold;
+
+}
+.footer-link:hover{
+  color: #d0e8f2;
+
+}
+.footer-paragraph{
+  font-size: 0.8rem;
+  color: #d0e8f2;
+  margin: 2rem auto auto auto;
+}
