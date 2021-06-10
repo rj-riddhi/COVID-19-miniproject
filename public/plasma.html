@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    
+  <link rel="shortcut icon" href="logo1.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Plasma information</title>
+    <link rel="stylesheet" href="./css/covid.css">
+    
+    
+</head>
+<body style="background: rgb(135, 180, 199);">
+
+  <HEADER class="header-1">
+    <span> 
+      <i class="fas fa-eye" style="padding-left: 5px;"></i>
+      <p id="visited" style="position: absolute;  top:12px; left:28px"></p>
+      <script>
+          var x = localStorage.getItem("onload");
+          if(x===null){
+            x=0;
+          }
+          x++;
+          localStorage.setItem("onload",x)
+          document.getElementById("visited").innerHTML=x +" People Visited";
+      </script>
+    </span>
+    <h2 style="padding:0px;margin:0px;margin-left: 40%; font-weight: bolder;">Stay<span style="color:orange">Up</span>  Stay<span style="color: orange;">S</span>afe</h2>
+    <p class="Datetime">Date/Time: <span id="datetime"></span></p><script>var dt = new Date();
+      document.getElementById("datetime").innerHTML=dt.toLocaleString();</script>
+      
+    
+      
+    
+  </HEADER>
+  
+    <div class="main_container">
+      
+        <a href="./index.html" style="margin-top:1.5rem;"><i class="fa fa-arrow-circle-o-left" aria-hidden="true" style="font-size: 3rem; color : rgb(0,0,0,.3);
+          -webkit-backdrop-filter:blur(10px);
+          backdrop-filter:blur(100px);height: 3rem;"></i>
+      </a>
+      
+      
+
+      <div style="margin-top: 5rem;box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2); background : rgb(0,0,0,.3);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(100px);height: 3rem;" >
+          <h3  id="blink" style="color:rgb(25, 110, 25); text-align: center; padding-top: 0.7rem;">Your Contribution may help save a life!</h3>
+          <script type="text/javascript">
+            var blink = document.getElementById('blink');
+               setInterval(function() {
+                blink.style.opacity = (blink.style.opacity == 0 ? 1 : 0);
+            }, 1500);
+        </script>
+     </div>
+
+            
+          <div class="mt-5  "style="text-align:center;"><h5>Manage Your Registration <span><a href="./login_signup.html"><button type="button" class="btn btn-outline-primary"><span><i class="fa fa-user-plus" aria-hidden="true"></i></span> Login</button></a></span></h5>
+          </div>
+         <div class="container-fluid">
+           
+
+            <div class="dash-cards1" style="padding-top: 5rem;">
+        
+              
+              
+              <div class="card-single total" >
+                
+                 <div class="card-body">
+                   <span><i class="fa fa-heartbeat"></i></span>
+                   <div>
+                       <h5 class="font-weight-bold" style="color:grey;font-weight:bold">Plasma Requests</h5>
+                       <h4 class="count" id="request">0</h4>
+                   </div>
+                   <div >
+                    <a href="./login_signup.html"><button type="button" class="btn btn-outline-info" style="margin-left : 13rem;margin-top:3rem;position: relative;"><span><i class="fa fa-heartbeat" aria-hidden="true"></i></span>Request</button></a>
+                   </div>
+                 </div>
+               </div>
+           
+               <div class="card-single recover">
+                 <div class="card-body">
+                   <span class="fa fa-user-plus"></span>
+                   <div>
+                       <h5 class="text-success font-weight-bold">Plasma Donors</h5>
+                       <h4 class="count" id="doner">0</h4>
+                   </div>
+                   <div >
+                    <a href="./login_signup.html"><button type="button" class="btn btn-outline-success" style="margin-left : 13rem;margin-top:3rem;position: relative;"><span><i class="fa fa-user-plus" aria-hidden="true"></i></span>Donate</button></a>
+                  </div>
+                 </div>
+               </div>
+
+               
+           </div>
+
+
+        
+</div>
+
+<div class="container-fluid">
+           
+
+            <div class="dash-cards1" style="padding-top: 5rem;">
+        
+              
+              
+              <div class="card-single total" style="height:17.5rem;">
+                
+                 <div class="card-body" >
+                   <span><i class="fa fa-heartbeat"></i></span>
+                   <div style="background-color : efefef">
+                       <h5 class="font-weight-bold" style="color:grey;font-weight:bold">Request Plasma</h5>
+                       
+                   </div>
+                  
+                 </div>
+                 <div style="padding-left : 1rem; padding-top : 1rem;  ">
+                   <strong >You CAN request plasma if : </strong>
+                     <div style="padding-left : 1.2rem;padding-top:1.5rem;">
+                     <ul style="list-style-position: outside;">
+                       <li  ><i class="fas fa-check-circle"></i> A patient positive for COVID-19 has been prescribed for Plasma by the attending doctor.</li>
+                       
+                     </ul>
+                     </div>
+                   </div><div >
+                    <a href="#Plasma_Request"><button type="button" class="btn btn-outline-info" style="margin-left : 25rem;margin-top:1.5rem;position: relative; margin-bottom : 0.7rem;"><span><i class="fa fa-heartbeat" aria-hidden="true"></i></span> Request List</button></a>
+                   </div>
+                   
+               </div>
+               
+           
+               <div class="card-single recover">
+                 <div class="card-body">
+                   <span class="fa fa-user-plus"></span>
+                   <div>
+                       <h5 class="text-success font-weight-bold">Plasma Donation</h5>
+                       
+                   </div>
+                   </div>
+                   <div style="padding-left : 1rem; padding-top : 1rem;">
+                   <strong >You CAN  request plasma if : </strong>
+                     <div style="padding-left : 1.2rem;padding-top:1.5rem;">
+                     <ul style="list-style-position: outside;">
+                       <li  ><i class="fas fa-check-circle"></i> You were tested positive for COVID-19.</li>
+                       <li  ><i class="fas fa-check-circle"></i> You are between 18-60 years old.</li>
+                       <li  ><i class="fas fa-check-circle"></i> You have fully recovered.</li>
+                       <li  ><i class="fas fa-check-circle"></i> You are free of symptoms for <span style="color:orange;">14 days</span>.</li>
+                       <li  ><i class="fas fa-check-circle"></i> You have tested positive before  <span style="color:orange;">28 days.</span>.</li>
+                       <li  ><i class="fas fa-check-circle"></i> In case you have already donated plasma, you are still eligible to   <span style="color:orange;">donate again after every 14 days</span> or as recommended by your doctor.</li>
+                       
+                     </ul>
+                     </div>
+                   </div>
+                   <div style="padding-left : 1rem; padding-top : 1rem;">
+                   <strong >You CANNOT  request plasma if : </strong>
+                     <div style="padding-left : 1.2rem;padding-top:1.5rem;">
+                     <ul style="list-style-position: outside;">
+                       <li  ><i class="fas fa-check-circle"></i> Your weight is less than 50 kg.</li>
+                       <li  ><i class="fas fa-check-circle"></i> You have ever been pregnant.</li>
+                       <li  ><i class="fas fa-check-circle"></i> You are diabetic on insulin.</li>
+                       <li  ><i class="fas fa-check-circle"></i> Your Blood Pressure is more than 140 and diastolic less than 60 or more than 90. </li>
+                       <li  ><i class="fas fa-check-circle"></i> You have uncontrolled diabetes or hypertension with change in medication in last 28 days.</li>
+                       <li  ><i class="fas fa-check-circle"></i> You are a  <span style="color:orange;">Cancer Survivor</span>.</li>
+                       <li  ><i class="fas fa-check-circle"></i> You have chronic kidney/heart/lung or liver disease.</li>
+                       
+                     </ul>
+                     </div>
+                   </div>
+                   <div >
+                    <a href="#plasmadonation"><button type="button" class="btn btn-outline-success" style="margin-left : 25rem;margin-top:1.5rem;position: relative; margin-bottom : 0.7rem;"><span><i class="fa fa-user-plus" aria-hidden="true"></i></span> Donor List</button></a>
+                   </div>
+                   
+               </div>
+           
+               
+           </div>
+
+           
+        
+</div>
+  
+    
+   <h1  id="plasmadonation"class="my-5" style="box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);  padding-top: 2rem;text-align:center; border-color: grey;">
+      Plasma Request List
+    </h1>
+           <div class="table-striped table-responsive activity-card " style="box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);  padding-top: 1rem;text-align:center; border-color: grey;">
+            <table>
+                 <thead style="text-align : center;">
+                  <tr>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Age</th>
+                    <th>Blood Group</th>
+                    <th>Phone Number</th>
+                    <th>Date of COVID+</th>
+                    <th>State</th>
+                    <th>City</th>
+                    <th>Hospital</th>
+                    
+                  </tr>
+                </thead>
+                  <tbody id="requesttable"></tbody>
+
+
+             <script>
+    async function getCovidapi(){
+      const jsondata = await fetch('http://localhost:3000/plasmarequestapi');
+      const jsdata = await jsondata.json();
+      
+      for(var i = 0 ; i < jsdata.length ; i++)
+      {
+  
+        
+        var username = jsdata[i].username;
+        var  gender = jsdata[i].gender;
+        var age = jsdata[i].age;
+        var blood= jsdata[i].blood;
+        var phone =jsdata[i].phonenumber;
+        var date = jsdata[i].date;
+        var state = jsdata[i].state;
+        var city = jsdata[i].city;
+        var hospital = jsdata[i].hospital;
+        var html = "<tr><td>"+username+"</td><td>"+gender+"</td><td>"+age+"</td><td>"+blood+"</td><td>"+phone+"</td><td>"+date+"</td><td>"+state+"</td><td>"+city+"</td><td>"+hospital+"</td></tr>";
+        
+        document.getElementById('requesttable').innerHTML+=html;
+        document.getElementById('request').innerHTML = jsdata.length +" Requests";
+
+          
+           
+
+        }
+   
+
+      
+  }
+  getCovidapi();
+  </script>
+            </table>
+
+        </div>    
+
+
+
+   <h1  id="Plasma_Request"class="my-5" style="box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);  padding-top: 2rem;text-align:center; border-color: grey;">
+      Plasma Donator's List
+    </h1>
+           <div class="table-striped table-responsive activity-card " style="box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);  padding-top: 1rem;text-align:center; border-color: grey;">
+            <table>
+                 <thead style="text-align : center;">
+                  <tr>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Age</th>
+                    <th>Blood Group</th>
+                    <th>Phone Number</th>
+                    <th>Date of COVID-19 Positive</th>
+                    <th>Date of COVID-19 Negative</th>
+                    <th>State</th>
+                    <th>City</th>
+                    
+                  </tr>
+                </thead>
+                  <tbody id="donatetable"></tbody>
+
+
+             <script>
+    async function getDonors(){
+      const jsondonatedata = await fetch('http://localhost:3000/plasmadonateapi');
+      const jsdonatedata = await jsondonatedata.json();console.log(jsdonatedata)
+      
+      for(var i = 0 ; i < jsdonatedata.length ; i++)
+      {
+  
+        
+        var username = jsdonatedata[i].username;
+        var  gender = jsdonatedata[i].gender;
+        var age = jsdonatedata[i].age;
+        var blood= jsdonatedata[i].blood;
+        var phone =jsdonatedata[i].phonenumber;
+        var positivedate = jsdonatedata[i].positivedate;
+        var negativedate = jsdonatedata[i].negativedate;
+        var state = jsdonatedata[i].state;
+        var city = jsdonatedata[i].city;
+        var html = "<tr><td>"+username+"</td><td>"+gender+"</td><td>"+age+"</td><td>"+blood+"</td><td>"+phone+"</td><td>"+positivedate+"</td<td>"+negativedate+"</td><td>"+state+"</td><td>"+city+"</td><tr>";
+        
+        document.getElementById('donatetable').innerHTML+=html;
+        document.getElementById('doner').innerHTML = jsdonatedata.length +" Donations";
+
+          
+           
+
+        }
+   
+
+      
+  }
+  getDonors();
+  </script>
+            </table>
+
+        </div>    
+
+
+
+          <div style="margin-top: 2rem;margin-bottom: 5rem; padding-left: 10rem;">
+            <div class="container scrolltop float-right" >
+              <i class="fas fa-arrow-alt-circle-up" onclick="topFunction()" id="myBtn" aria-hidden="true" style="font-size:30px; "></i>
+            </div>
+           
+          </div>
+    
+           <br><br><br>
+           <FOOTER>
+            <NAV>
+              
+              This is our small try to help people in this pendamic <br><br>
+              All Copyright reserved to Radhika 2021 &copy;<br>
+             <p style="padding-top:15px ;">Follow Us</p>
+             <a href="" class="foolowUs" ><i class="fa fa-instagram" ></i></a>
+             <a href="" class="foolowUs"><i class="fa fa-twitter" ></i></a> 
+             <a href="" class="foolowUs"><i class="fa fa-linkedin"></i></a>
+             <a href="" class="foolowUs"><i class="fa fa-envelope"></i></a>
+                
+               
+              
+            </NAV>
+          </FOOTER>
+
+          <script type="text/javascript">
+  
+  
+
+            mybutton = document.getElementById("myBtn");
+            window.onscroll=function(){scrollFunction()};
+            function scrollFunction(){
+              if(document.body.scrollTop > 100 || document.documentElement.scrollTop > 100){
+                mybutton.style.display = "block";
+              }else{
+                mybutton.style.display = "none";
+              }
+            }
+              function topFunction(){
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+              
+            }
+          </script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+

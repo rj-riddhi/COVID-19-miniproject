@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plasma Request/Donation Form</title>
+
+    <script src="cities.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./plasma.css">
+     
+    
+
+    <style>
+        .modal {
+          display: none;
+          position: fixed;
+          z-index: 8;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          overflow: auto;
+          background-color: rgb(0, 0, 0);
+          background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-content {
+          margin: 50px auto;
+          border: 1px solid #999;
+          width: 60%;
+        }
+        h2,p {
+          margin: 0 0 20px;
+          font-weight: 400;
+          color: #999;
+        }      span {
+          color: #666;
+          display: block;
+          padding: 0 0 5px;
+        }
+        form {
+          padding: 25px;
+          margin: 25px;
+          box-shadow: 0 2px 5px #f5f5f5;
+          background: #eee;
+        }
+        input,
+        textarea {
+          width: 90%;
+          padding: 10px;
+          margin-bottom: 20px;
+          border: 1px solid #1c87c9;
+          outline: none;
+        }
+        .contact-form button {
+          width: 100%;
+          padding: 10px;
+          border: none;
+          background: #1c87c9;
+          font-size: 16px;
+          font-weight: 400;
+          color: #fff;
+        }
+        button:hover {
+          background: #2371a0;
+        }
+        .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+          color: black;
+          text-decoration: none;
+          cursor: pointer;
+        }
+        button.button {
+          background: none;
+          border-top: none;
+          outline: none;
+          border-right: none;
+          border-left: none;
+          border-bottom: #02274a 1px solid;
+          padding: 0 0 3px 0;
+          font-size: 16px;
+          cursor: pointer;
+        }
+        button.button:hover {
+          border-bottom: #a99567 1px solid;
+          color: #a99567;
+        }
+      </style>
+    
+</head>
+<body>
+    <div class="cont">
+        <form action="/plasma_request_donate.html" method="POST" >
+        <div class="form request" >
+         
+            <h2>New Account</h2>
+            
+           
+
+                <div class="form-group">
+                  <label >Name</label>
+                  <input type="text" class="form-control" name="username" placeholder="Name" autocomplete="off" required>
+                </div>
+              
+                <div class="form-group">
+                  <label>Email Address</label>
+                  <input type="email" class="form-control" name="email" placeholder="name@example.com" autocomplete="off" required>
+                </div>
+
+                <div class="form-group">
+                  <label >Password</label>
+                  <input id="pass" type="password" class="form-control" name="password" placeholder="password" autocomplete="off" required>
+                </div>
+
+                <div class="form-group">
+                  <label>Confirm Password</label>
+                  <input id="cpass"type="password" class="form-control" name="confirmpassword" placeholder="Retype Password" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" class="form-control" name="phonenumber" placeholde="phone" required>
+                  </div>
+            <button class="submit " type="submit"  >Sign Up</button>
+             
+             <!-- <script>
+                 function registered(){
+                        var pass = document.getElementById("pass").value;
+                        var cpass = document.getElementById("cpass").value;
+                        if(pass == cpass){
+                    swal("Good job!", "Registered successfully!!!", "success");}
+                 }
+             </script> -->
+            
+        </div>
+    </form>
+        <div class="sub-cont">
+            <div class="img">
+                <div class="img-text m-up">
+                    <h2>You want to Donate?</h2>
+                    <p>Your contribution may help save a life!</p>
+                </div>
+                <div class="img-text m-in">
+                    <h2>Login</h2>
+                    <p>If you already registerd,just Login!</p>
+                </div>
+                <div class="img-btn">
+                    <span class="m-up">Request</span>
+                    <span class="m-in">Donate</span>
+                </div>
+            </div>
+            <div class="form login" >
+                <form action="/login.html" method="POST">
+                <h2>Login</h2>
+                <label >
+                    <span>Emaill Address</span>
+                    <input type="email" name="email1">
+                </label>
+                <label >
+                    <span>Password</span>
+                    <input type="password" name="password1">
+                </label>
+                <button type="submit" class="submit">Login </button>
+                <a href="./forgotpassword.html"><p class="forgot_password">Forgot Password ? </p> </a></form>
+       
+            </div>
+        </div>
+    </div>
+     
+    <script src="plasma.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1">
+  <link rel="shortcut icon" href="logo1.ico">
+  <link rel="stylesheet" href="./css/covid.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"></script>
+  <script src="cities.js"></script>
+  <script>
+    async function getCovidapi(){
+      const jsondata = await fetch('https://api.covid19india.org/data.json');
+      const jsdata = await jsondata.json();
+      const data = jsdata.statewise;
+      const totalStates = jsdata.statewise.length;
+      var maxRecovered = 0;
+      var maxState ="";
+      
+      var sname = new Array();
+      var sdeath = new Array();
+      var srecover = new Array();
+      for(var i = 1 ; i < totalStates ; i++)
+      {
+  
+        
+        var state = data[i].state;
+        var confirmed =  data[i].confirmed;
+        var deaths = data[i].deaths;
+        var recovered = data[i].recovered;
+        var active = data[i].active;
+        var date = data[i].lastupdatedtime;
+        var html = "<tr><td><a href='' style='color:black;'>"+state+"</a></td><td class='Totalcases'>"+confirmed+"</td><td class='Totaldeaths'>"+deaths+"</td><td class='Totalrecovered'>"+recovered+"</td><td class='Activecases'>"+active+"</td><td>"+date+"</td><tr>";
+        document.getElementById('result').innerHTML+=html;
+
+        //FOR CHART
+          sname[i] = state;
+          sdeath[i] = deaths;
+          srecover[i] = recovered;
+          
+           
+        // FOR DROPDOWN LIST
+          var html1 = "<option>"+state+"</option>";
+          document.getElementById('State').innerHTML+=html1;
+
+          if(recovered > maxRecovered ){maxRecovered = recovered;
+            maxState = state;}
+        }
+
+        console.log(sname);
+        var ctx = document.getElementById('chart').getContext('2d');
+              
+                    var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+  labels: sname,
+  datasets: [{
+      label: 'State-Wise Recovered',
+      data:  srecover ,
+      backgroundColor: 'transparent',
+      borderColor:'green', 
+          // 'rgba(255, 99, 132, 1)',
+          
+      borderWidth: 4
+  },
+  {
+      label: 'State-Wise Deaths',
+      data: sdeath,
+      backgroundColor: 'transparent',
+      borderColor:
+          'rgba(255, 99, 132, 1)',
+          
+      borderWidth: 4
+  }]
+},
+options: {
+  
+  scales: {
+      y: {
+          beginAtZero: true
+      }
+  }
+}
+});
+
+
+        
+
+        
+        
+          document.getElementById('maxstate').innerHTML = maxState+" has maximum recovered cases!!!!";
+          document.getElementById('maxrecovered').innerHTML = maxRecovered;
+      
+  }
+  getCovidapi();
+  </script>
+  
+  <script >
+    async function getState()
+    {
+               var selectedState = form.select[form.select.selectedIndex].text;
+               document.getElementById('Statename').innerHTML = selectedState;
+
+               const jsondata = await fetch('https://api.covid19india.org/data.json');
+               const jsdata = await jsondata.json();
+               const data = jsdata.statewise;
+               const totalStates = jsdata.statewise.length;
+               
+               for(var i = 1 ; i < totalStates ; i++)
+          {
+  
+      
+        var state = data[i].state;
+        var confirmed =  data[i].confirmed;
+        var deaths = data[i].deaths;
+        var recovered = data[i].recovered;
+        var active = data[i].active;
+        var date = data[i].lastupdatedtime;
+        var deltaconfirmed = data[i].deltaconfirmed;
+        
+        if(state == selectedState){
+          document.getElementById('Confirmed').innerHTML = confirmed;
+          document.getElementById('Deaths').innerHTML = deaths;
+          document.getElementById('Recover').innerHTML = recovered;
+          document.getElementById('Active').innerHTML = active;
+          document.getElementById('marqueeheaderstate').innerHTML = state;
+          document.getElementById('marqueeheadercase').innerHTML = deltaconfirmed;
+          document.getElementsByClassName('marqueeconfirmed').innerHTML = confirmed;
+          document.getElementById('marqueerecover').innerHTML = recovered; 
+          document.getElementById('marqueedeath').innerHTML = deaths;
+          document.getElementById('marqueeactive').innerHTML = active;
+          document.getElementById('marqueeupdate').innerHTML = date;
+          document.getElementById('updatedate').innerHTML = "Last update on: "+date;
+          
+
+
+        }
+        else{
+          console.log('erroe');
+        }
+      
+               
+
+        }
+        
+      }
+  </script>
+
+
+   <title>Stay Safe</title>
+   </head>
+<body>
+  <HEADER class="header-1">
+    <span> 
+      <i class="fas fa-eye" style="padding-left: 5px;"></i>
+      <p id="visited" style="position: absolute;  top:12px; left:28px"></p>
+      <script>
+          var x = localStorage.getItem("onload");
+          if(x===null){
+            x=0;
+          }
+          x++;
+          localStorage.setItem("onload",x)
+          document.getElementById("visited").innerHTML=x +" People Visited";
+      </script>
+    </span>
+    <h2 style="padding:0px;margin:0px;margin-left: 40%; font-weight: bolder;">Stay<span style="color:orange">Up</span>  Stay<span style="color: orange;">S</span>afe</h2>
+    <p class="Datetime">Date/Time: <span id="datetime"></span></p><script>var dt = new Date();
+      document.getElementById("datetime").innerHTML=dt.toLocaleString();</script>
+      
+    
+      
+    
+  </HEADER>
+  <input type="checkbox" id="sidebar-toggle">
+          <div class="sidebar">
+            <div class="sidebr-header">
+              <h3 class="brand"> 
+                <span><img style="height: 38px; width: 38px; border-radius: 50%;"src="./img/radhi.jpg" alt="An image"></span>
+                <span>Covid-<span style="color:orange">19</span></span>
+              </h3> 
+              <label for="sidebar-toggle" class="ti-menu-alt"></label>
+            </div>
+            <div class="sidebar-menu">
+              <ul>
+                <li>
+                  <a href="./index.html">
+                    <span class="ti-home"></span>
+                    <span>Home</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="./CSS-My Site/index.html" target="_blank" >
+                    <span class="fa fa-user-circle"></span>
+                    <span>Team</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="./plasma.html" target="_blank">
+                    <span class="fas fa-clinic-medical"></span>
+                    <span>Plazma</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#symptoms">
+                    <span class="ti-time"></span>
+                    <span>Corona Symptums</span>
+                  </a>
+                </li>
+                
+                <li>
+                  <a href="#aboutid">
+                    <span class="fa fa-stethoscope"></span>
+                    <span>Prevention</span>
+                  </a>
+                </li>
+                <li>
+                  <li>
+                    <a href="#symptoms">
+                      <span class="fa fa-ambulance"></span>
+                      <span>Vaccine Tracker</span>
+                    </a>
+                  </li>
+                  
+                  <a href="#contactUs">
+                    <span class="ti-book"></span>
+                    <span>Contact us</span>
+                  </a>
+                </li>
+                
+              </ul>
+            </div>
+          </div>
+  
+
+          <div class="main-content" >
+
+                <div class="sildes-container" >
+                  <div class="mySlides fade">
+                    <img src="./img/logo.png" style="width:100%; height: 400px;  border-radius: 15px;">
+                  </div>
+                  <div class="mySlides fade">
+                    <img src="https://media.istockphoto.com/vectors/family-wearing-face-mask-stay-home-to-fight-against-covid19-vector-id1215279775?k=6&m=1215279775&s=612x612&w=0&h=-7vz7HQtIUHJgb1R9QLN7aK0eBjjAccnZASGIVvHmM4=" style="width:100%;height: 400px; border-radius: 15px;">
+                  </div>
+                  <div class="mySlides fade">
+                    <img src="https://media.istockphoto.com/vectors/social-distancing-space-between-people-to-avoid-spreading-covid19-vector-id1215250122?k=6&m=1215250122&s=612x612&w=0&h=q_k1zH9WPgigNcs1D3yp6XNcIHWc3UD_liZeNl9Yk00=" style="width:100%;height: 400px; border-radius: 15px;">
+                  </div>
+                  <div class="mySlides fade">
+                    <img src="https://media.istockphoto.com/vectors/family-vaccination-concept-design-time-to-vaccinate-banner-syringe-vector-id1292493235?k=6&m=1292493235&s=612x612&w=0&h=3CMoSihmESiYOrQFNm_TT5QGlgVejJ2e0LQgBZsS4Cg=" style="width:100%;height: 400px; border-radius: 15px;">
+                  </div>
+                  <div class="mySlides fade">
+                    <img src="https://media.istockphoto.com/vectors/wear-mask-and-gloves-please-text-sign-man-woman-persons-in-protective-vector-id1314829707?k=6&m=1314829707&s=612x612&w=0&h=LKuBEEVWCTIGWt_voOPvD00Vm1DeI6dRZeKnVK5E_Qg=" style="width:100%;height: 400px; border-radius: 15px;">
+                  </div>
+                  <div class="mySlides fade">
+                    <img src="https://media.istockphoto.com/vectors/coronavirus-covid19-prevention-icon-set-virus-vector-illustration-vector-id1257079649?k=6&m=1257079649&s=612x612&w=0&h=jCkyBxyhEPSuBrvsIx-N3nCotgIWLDoEHZlmDl5fcAo=" style="width:100%;height: 400px; border-radius: 15px;">
+                  </div>
+                  
+                </div>
+                <br>
+
+                <div style="text-align:center;visibility: hidden;">
+                  <span class="dot"></span> 
+                  <span class="dot"></span> 
+                  <span class="dot"></span> 
+                  <span class="dot"></span> 
+                  <span class="dot"></span> 
+                  <span class="dot"></span> 
+                </div>
+                
+                <script>
+                var slideIndex = 0;
+                showSlides();
+                
+                function showSlides() {
+                  var i;
+                  var slides = document.getElementsByClassName("mySlides");
+                  var dots = document.getElementsByClassName("dot");
+                  for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";  
+                  }
+                  slideIndex++;
+                  if (slideIndex > slides.length) {slideIndex = 1}    
+                  for (i = 0; i < dots.length; i++) {
+                    dots[i].className = dots[i].className.replace(" active", "");
+                  }
+                  slides[slideIndex-1].style.display = "block";  
+                  dots[slideIndex-1].className += " active";
+                  setTimeout(showSlides, 5000); // Change image every 2 seconds
+                }
+                </script>
+                
+    <main>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <form name="form" style=" border-radius: 10px;
+          box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);">
+          <select  class="form-control"name="select" id="State" onchange="getState()">
+            <option value="">Select State</option>
+          </select>
+        </form>
+        </div>
+        
+      </div>  
+                    
+      <h2 class="dash-title" id="Statename"style="top:32.5rem">Overview</h2>
+      <div  id="updatedate"class="form-control"style="display: flex; width:25%;margin-left:50rem; border-radius: 10px;
+      box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);">Last update on: </div>
+      <div class="dash-cards" style="padding-top: 5rem;">
+        
+         <div class="card-single total" >
+           
+            <div class="card-body">
+              <span><i class="fas fa-male"></i></span>
+              <div>
+                  <h5 class="font-weight-bold" style="color:grey;font-weight:bold">Total Confirmed</h5>
+                  <h4 class="count" id="Confirmed">30,000</h4>
+              </div>
+            </div>
+          </div>
+      
+          <div class="card-single recover">
+            <div class="card-body">
+              <span class="ti-briefcase"></span>
+              <div>
+                  <h5 class="text-success font-weight-bold">Total Recover</h5>
+                  <h4 class="count" id="Recover">30,000</h4>
+              </div>
+            </div>
+          </div>
+          <div class="card-single active">
+            <div class="card-body">
+              <span class="ti-briefcase"></span>
+              <div>
+                  <h5 class="text-info font-weight-bold">Total Active</h5>
+                  <h4 class="count" id="Active">30,000</h4>
+              </div>
+            </div>
+          </div>
+          <div class="card-single deaths" >
+            <div class="card-body">
+              <span class="ti-briefcase"></span>
+              <div>
+                  <h5 class="text-danger font-weight-bold">Total Deaths</h5>
+                  <h4 class="count" id="Deaths">30,000</h4>
+              </div>
+            </div>
+          </div>
+         
+      </div>
+
+      <section class="recent">
+        <div class="activity-grid">
+          <div class="activity-card">
+              <h3 style="box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3); padding: 2px; border-color: grey;">Corona Update(Live): <span id="marqueeheadercase"></span> new cases in <span id="marqueeheaderstate"></span> today</h3>
+        
+             <marquee behavior="" direction="up" height="200px" >
+              <p style="padding: 5rem; text-align: center;">
+              <span class="marqueeconfirmed">28173655</span> 
+              people are so far affected in <span id="marqueestate">India</span> 
+              by <span style=" font-weight: 800;">novel coronavirus covid-19.</span> 
+              <span style=" color:green" id="marqueerecover">25939504</span>out of 
+              <span class="marqueeconfirmed">28173655</span>  have recovered. Sadly,
+              <span style="color:tomato;" id="marqueedeath">331909</span> patients have died due to coronavirus in India. 
+              <span style=" color:royalblue;"id="marqueeactive">1890975</span> patients are still in hospital and recovering. 
+              The last recorded case of coronavirus in India was <span id="marqueeupdate"></span>. Below is the list of sources from which data is aggregated into a crowdsourced patient database along with some note on travel history and suspected contraction from another patient if any. All data is verified by a group of volunteers at Covid19India.org after aggregating from various district and state level health bulletins and other reliable sources.</p>
+        
+             </marquee>
+            <h3 class="my-5"style="box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3); padding: 2px; border-color: grey; ">State-wise Data</h3>
+
+            <div class="table-responsive">
+              <table>
+                   <thead>
+                    <tr>
+                      <th>State</th>
+                      <th>TotalConfirmed</th>
+                      <th>TotalDeaths</th>
+                      <th>TotalRecovered</th>
+                      <th>ActiveCases</th>
+                      <th>Date</th>
+                      
+                    </tr>
+                  </thead>
+                    <tbody id="result"></tbody>
+
+              </table>
+            
+            </div>
+            <div  >
+              <!-- <div>
+                <h5>Total Recovered</h5></div> -->
+              <canvas id="chart" style="height: 40rem;" >
+                
+              </canvas>
+              <script >
+                
+              </script>
+            </div>
+            </div>
+
+
+          <div class="summary">
+                <div class="summary-card" >
+                  
+                    <h3 id="blink" style="box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3); padding: 5px;margin: 5px; border-color: grey; text-align: center;">Helpful links</h3>
+                       
+                  
+                      <div class="summary-single">
+                        
+                       
+                      <script type="text/javascript">
+                        var blink = document.getElementById('blink');
+                        setInterval(function() {
+                            blink.style.opacity = (blink.style.opacity == 0 ? 1 : 0);
+                        }, 1500);
+                    </script>
+                    <div>
+                    <marquee behavior="scroll" direction="up">
+                      <a href=""></a>
+                      <!-- +91-11-23978046
+                        HELPLINE NUMBER -->
+                         <a href="" style="text-decoration: none;">Ministry of Health and Family Welfare, Gov. of India</a><br><br>
+                         <a href=""> MOHFW - HELPLINE NUMBERS [by State]</a><br><br>
+                         <a href=""> WHO: COVID-19 Home Page</a><br><br>
+                         <a href=""> Centers for Disease Control and Prevention (CDC)</a><br><br>
+                         <a href=""> COVID-19 Global Tracker</a><br><br>
+                    </marquee>  </div>
+                      </div>
+                      
+                      <div class="summary-single">
+                        <span class="ti-face-smile"></span>
+                        <div style="box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3); padding: 2px; border-color: grey;">
+                        
+                          <h5 id = "maxrecovered" style="font-weight: bolder; text-decoration:underline; "></h5>
+                          <small id="maxstate" style="font-weight: bold;"></small>
+                        </div>
+                      </div>
+                
+                
+                </div>
+                <!-- <div class="summary-single"> -->
+                  
+                <!-- </div> -->
+               
+                
+                
+          </div>
+        </div>
+        <!-- <hr style="border-style: dotted; width: 3%;border-bottom: none;border-width: 2px;border-color: #265F6A;margin: 4rem auto;"> -->
+        <!-- ////// Symptoms/////// -->
+        <div class="container-fluid pt-5 pb-5" id="symptoms"> 
+          <div class="section_header text-center mb-5 mt-4">
+            <h1 style="color: #027581;">Coronavirus symptoms</h1>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-4 col-md-4 col-12 mt-5">
+                <figure class="text-center hover" style="font-weight: 700;">
+                <img src="./img/cough.jpg" class="img-fluid " width="120px" height="120px" style="border-radius: 50%;
+                box-shadow:  3px 3px 3px rgba(0, 0, 0, 0.3);" >
+                  <figcaption>Cough </figcaption>
+              </figure>
+              </div>
+              <div class="col-lg-4 col-md-4 col-12 mt-5">
+                <figure class="text-center hover" style="font-weight: 700;">
+                <img src="./img/runnynose.jpg" class="img-fluid " width="120px" height="120px" style="border-radius: 50%;
+                box-shadow:  3px 3px 3px rgba(0, 0, 0, 0.3);" >
+                  <figcaption>Runny Nose </figcaption>
+              </figure>
+              </div>
+            
+              <div class="col-lg-4 col-md-4 col-12 mt-5">
+                <figure class="text-center hover" style="font-weight: 700;">
+                <img src="./img/fever.jpg" class="img-fluid " width="120px" height="120px" style="border-radius: 50%;
+                box-shadow:  3px 3px 3px rgba(0, 0, 0, 0.3);" >
+                  <figcaption>Fever</figcaption>
+              </figure>
+              </div>
+            
+              <div class="col-lg-4 col-md-4 col-12 mt-5">
+                <figure class="text-center hover" style="font-weight: 700;">
+                <img src="./img/sick.jpg" class="img-fluid " width="120px" height="120px" style="border-radius: 50%;
+                box-shadow:  3px 3px 3px rgba(0, 0, 0, 0.3);" >
+                  <figcaption>Weakness </figcaption>
+              </figure>
+              </div>
+            
+              <div class="col-lg-4 col-md-4 col-12 mt-5">
+                <figure class="text-center hover" style="font-weight: 700;">
+                <img src="https://media.istockphoto.com/vectors/man-feel-pain-in-stomach-vector-isolated-vector-id1214084387?k=6&m=1214084387&s=170667a&w=0&h=XoLl7-6QpJMDT1W57-VOU98TuKZfHVc3y81k8Z6TMYw=" class="img-fluid " width="120px" height="120px" style="border-radius: 50%;
+                box-shadow:  3px 3px 3px rgba(0, 0, 0, 0.3);" >
+                  <figcaption>Stomach Pain </figcaption>
+              </figure>
+              </div>
+              <div class="col-lg-4 col-md-4 col-12 mt-5">
+                <figure class="text-center hover" style="font-weight: 700;">
+                <img src="https://image.freepik.com/free-vector/girls-woman-people-having-headache-migraine-stress-depression-frustration-anger-expression-sickness-concept-isolated-illustration-flat-cartoon-style-health-medical_136070-84.jpg" class="img-fluid " width="120px" height="100px" style="border-radius: 50%;
+                box-shadow:  3px 3px 3px rgba(0, 0, 0, 0.3);" >
+                  <figcaption>Headache </figcaption>
+              </figure>
+              </div>
+            
+            </div>
+          </div>
+        </div>
+        
+        <hr style="border-style: dotted; width: 3%;border-bottom: none;border-width: 2px;border-color: #265F6A;margin: 4rem auto;">
+        <!-- ///////Prevention///////// -->
+        <div class="container-fluid pt-5 pb-5" id="aboutid"> 
+          <div class="section_header text-center mb-5 mt-4">
+            <h1 style="color: #027581;">5 Steps Prevention Against Coronavirus</h1>
+          </div>
+             <div class="container">
+               <div class="row">
+                 <div class="col-lg-4 col-md-4 col-12 mt-5">
+                   <div class="row">
+                     <div class="col-4 col-md-4 col-12">
+                     <figure class="text-center" style="font-weight: 700;">
+                        <img src="./img/handwash.jpg" class="img-fluid " width="90px" height="90px" style="border-radius: 50%;
+                        box-shadow:  3px 3px 3px rgba(0, 0, 0, 0.3);" >
+                      </figure>
+                     </div>
+                     <div class="col-lg-8 col-md-8 col-12">
+                          <p>Wash your hands regularly for 20 seconds,with soap and water or alcohol-based hand rub</p>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="col-lg-4 col-md-4 col-12 mt-5">
+                  <div class="row">
+                    <div class="col-4 col-md-4 col-12">
+                    <figure class="text-center" style="font-weight: 700;">
+                       <img src="./img/mask.jpg" class="img-fluid " width="90px" height="90px" style="border-radius: 50%;
+                       box-shadow:  3px 3px 3px rgba(0, 0, 0, 0.3);" >
+                     </figure>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-12">
+                         <p>Covor your nose and muth with a disposable tissue or flexed elbow when you cough or sneeze</p>
+                    </div>
+                  </div>
+                </div> 
+                <div class="col-lg-4 col-md-4 col-12 mt-5">
+                  <div class="row">
+                    <div class="col-4 col-md-4 col-12">
+                    <figure class="text-center" style="font-weight: 700;">
+                       <img src="https://image.freepik.com/free-vector/people-using-face-mask-social-distancing-covid19_24877-63552.jpg" class="img-fluid " width="90px" height="90px" style="border-radius: 50%;
+                       box-shadow:  3px 3px 3px rgba(0, 0, 0, 0.3);" >
+                     </figure>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-12">
+                         <p>Avoid close contact (1meter or 3 feet) with people who are unwell</p>
+                    </div>
+                  </div>
+                </div> 
+                <div class="col-lg-4 col-md-4 col-12 mt-5">
+                  <div class="row">
+                    <div class="col-4 col-md-4 col-12">
+                    <figure class="text-center" style="font-weight: 700;">
+                       <img src="./img/home.jpg" class="img-fluid " width="90px" height="90px" style="border-radius: 50%;
+                       box-shadow:  3px 3px 3px rgba(0, 0, 0, 0.3);" >
+                     </figure>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-12">
+                         <p>Stay home and self-isolate from others in the household if you fell unwell</p>
+                    </div>
+                  </div>
+                </div> 
+                <div class="col-lg-4 col-md-4 col-12 mt-5">
+                  <div class="row">
+                    <div class="col-4 col-md-4 col-12">
+                    <figure class="text-center" style="font-weight: 700;">
+                       <img src="./img/medical.jpg" class="img-fluid " width="90px" height="90px" style="border-radius: 50%;
+                       box-shadow:  3px 3px 3px rgba(0, 0, 0, 0.3);" >
+                     </figure>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-12">
+                         <p>If you have fever,cough and difficulty in breathing. seek medical care early</p>
+                    </div>
+                  </div>
+                </div> 
+              
+               </div>
+             </div>
+        </div>
+        <hr style="border-style: dotted; width: 3%;border-bottom: none;border-width: 2px;border-color: #265F6A;margin: 4rem auto;">
+        
+        <div class="container-fluid  pt-5 pb-5" id="contactUs">
+          <div class="section_header text-center mb-5 mt-4">
+              <h1 style="color: #027581;">Contact Us For Health Care</h1>
+            </div>
+            
+          <div class="container" >
+            <div class="row">
+              <div class="col-lg-8 offset-lg-2 col-12">
+              
+                
+              <form action="/index.html" method="POST" >
+
+                  <div class="form-group">
+                    <label >Username</label>
+                    <input type="text" class="form-control" name="username" placeholder="Name" autocomplete="off" required>
+                  </div>
+                
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" name="email" placeholder="name@example.com" autocomplete="off" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label >mobile</label>
+                    <input type="number" class="form-control" name="phonenumber" placeholder="mobile number" autocomplete="off" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Address</label>
+                    <input type="text" class="form-control" name="address" placeholder="1234 Main St" required>
+                  </div>
+
+                  <!-- <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label>State</label>
+                      <input type="text" class="form-control" name="city" required> -->
+                      <!-- <select onchange="print_city('state', this.selectedIndex);" id="sts" name ="stt" class="form-control" required></select>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>City</label>
+                      <select id ="state" class="form-control" required></select>
+                      <script language="javascript">print_state("sts");</script>
+
+                    </div>  -->
+                    
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>State</label>
+              <!-- <input type="text" class="form-control" name="city" required> -->
+              <select onchange="print_city('state', this.selectedIndex);" id="sts" name ="state" class="form-control" required></select>
+            </div>
+            <div class="form-group col-md-4">
+              <label>City</label>
+              <select id ="state" class="form-control" name="city" required></select>
+              <script language="javascript">print_state("sts");</script>
+
+            </div>
+                    
+                    
+                    
+                    <div class="form-group col-md-2">
+                      <label>Zip</label>
+                      <input type="text" class="form-control" name="zip" required>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label > Select Symptoms</label> <br>
+
+                    <div class="custom-control custom-checkbox custom-control-inline text-capitalize">
+                      <input type="checkbox" class="custom-control-input " id="customcheckbox1" name="coronasym" value="cold">
+                      <label  class="custom-control-label" for="customcheckbox1">Cold</label>
+                    </div>
+
+                    <div class="custom-control custom-checkbox custom-control-inline text-capitalize">
+                      <input type="checkbox" class="custom-control-input" id="customcheckbox2" name="coronasym" value="fever">
+                      <label  class="custom-control-label" for="customcheckbox2">Fever</label>
+                    </div>
+
+                    <div class="custom-control custom-checkbox custom-control-inline text-capitalize">
+                      <input type="checkbox" class="custom-control-input" id="customcheckbox3" name="coronasym" value="breath">
+                      <label  class="custom-control-label" for="customcheckbox3">Difficulty In Breath</label>
+                    </div>
+
+                    <div class="custom-control custom-checkbox custom-control-inline text-capitalize">
+                      <input  type="checkbox" class="custom-control-input " id="customcheckbox4" name="coronasym" value="weak">
+                      <label  class="custom-control-label" for="customcheckbox4">Feeling Weak</label>
+                    </div>
+                  </div>
+                
+                
+                  
+                  <div class="form-group">
+                    <label>Message</label>
+                    <textarea class="form-control" name="message" rows="3" required></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-secondary ">Submit</button>
+                  
+              </form>
+              
+              </div>
+            </div>
+          </div>
+                    <!-- //////////////// TOP-CURSOR//////////// -->
+    <div class="container scrolltop float-right pr-5">
+      <i class="fas fa-arrow-alt-circle-up" onclick="topFunction()" id="myBtn" aria-hidden="true" style="font-size:30px; "></i>
+    </div>
+   
+        </div>
+        
+      </section>
+    </main>
+
+
+
+   </div>
+  <FOOTER>
+    <NAV>
+      
+      This is our small try to help people in this pendamic <br><br>
+      All Copyright reserved to Radhika 2021 &copy;<br>
+     <p style="padding-top:15px ;">Follow Us</p>
+     <a href="" class="foolowUs" ><i class="fa fa-instagram" ></i></a>
+     <a href="" class="foolowUs"><i class="fa fa-twitter" ></i></a> 
+     <a href="" class="foolowUs"><i class="fa fa-linkedin"></i></a>
+     <a href="" class="foolowUs"><i class="fa fa-envelope"></i></a>
+        
+       
+      
+    </NAV>
+  </FOOTER>
+<script type="text/javascript">
+  
+  
+
+  mybutton = document.getElementById("myBtn");
+  window.onscroll=function(){scrollFunction()};
+  function scrollFunction(){
+    if(document.body.scrollTop > 100 || document.documentElement.scrollTop > 100){
+      mybutton.style.display = "block";
+    }else{
+      mybutton.style.display = "none";
+    }
+  }
+    function topFunction(){
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    
+  }
+</script>
+  
+  
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
